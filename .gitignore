@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Runtime data (SQLite, caches, optimized images)
+data/
+content/
+
+# Local env
+.env
+.env.local
+*.log
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

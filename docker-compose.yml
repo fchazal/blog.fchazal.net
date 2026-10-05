@@ -1,0 +1,64 @@
+# Déploiement CasaOS — fchazal.net
+#
+# 1) Adapter les variables (notamment CONTENT_PATH = dossier Obsidian).
+# 2) Depuis le dossier du projet sur le serveur :
+#      docker compose up -d --build
+#    (ou via CasaOS : Apps > Install a customized app, coller ce fichier)
+#
+# Variables optionnelles (créer un .env à côté) :
+#   SITE_URL=https://blog.fchazal.net
+#   CONTENT_PATH=/DATA/AppData/fchazal/content
+#   WEBMENTION_IO_TOKEN=...
+#   PUBLICATION_WEBHOOK_URL=...
+
+services:
+  fchazal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fchazal-net:local
+    container_name: fchazal-net
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      SITE_URL: "${SITE_URL:-http://localhost:3000}"
+      DATABASE_PATH: /app/data/interactions.sqlite
+      WEBMENTION_IO_TOKEN: "${WEBMENTION_IO_TOKEN:-}"
+      PUBLICATION_WEBHOOK_URL: "${PUBLICATION_WEBHOOK_URL:-}"
+    volumes:
+      # Contenu Markdown (site = source extérieure : Obsidian)
+      - "${CONTENT_PATH:-./content}:/app/content:ro"
+      # Données runtime (SQLite : likes, etc.)
+      - "./data:/app/data"
+    healthcheck:
+      test:
+        - "CMD"
+        - "node"
+        - "-e"
+        - "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: fchazal
+  author: fchazal
+  developer: fchazal
+  category: Blog
+  store_app_id: fchazal-net
+  port_map: "3000"
+  scheme: http
+  index: /
+  icon: https://blog.fchazal.net/artboard.png
+  title:
+    en_us: fchazal.net
+  tagline:
+    en_us: Carnet littéraire
+  description:
+    en_us: Suppléments d’âme & Bouts d’humanité — textes, essais, dessins et code.
