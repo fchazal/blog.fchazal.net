@@ -8,21 +8,22 @@ import { Sidebar } from "../components/Sidebar.jsx";
 import { ThemeToggle } from "../components/ThemeToggle.jsx";
 import { Link } from "../components/Link.jsx";
 
-import "./theme.css";
-import "./styles.css";
+import "../style/index.css";
 
 const DESKTOP_NAV = [
-  { href: "/posts", label: "Textes" },
+  { href: "/texts", label: "Textes" },
+  { href: "/shorts", label: "Shorts" },
   { href: "/essays", label: "Essais" },
-  { href: "/code", label: "Code" },
+  { href: "/experiments", label: "Expériences" },
   { href: "/about", label: "À propos" },
 ];
 
 const MOBILE_NAV = [
-  { href: "/posts", label: "Textes" },
+  { href: "/texts", label: "Textes" },
+  { href: "/shorts", label: "Shorts" },
   { href: "/essays", label: "Essais" },
-  { href: "/doodles", label: "Dessins" },
-  { href: "/code", label: "Code" },
+  { href: "/drawings", label: "Dessins" },
+  { href: "/experiments", label: "Expériences" },
   { href: "/about", label: "À propos" },
 ];
 
@@ -65,18 +66,6 @@ export default function Layout({ children }) {
 
       <div ref={topbarRef} className={`topbar${compact ? " is-compact" : ""}`}>
         <div className="header-wrap">
-          <header className="header">
-            <div className="wrap">
-              <h1 className="blog-title">
-                <a href="/">
-                  Suppléments d’âme
-                  <img className="title-logo" src="/artboard.png" alt="&" />
-                  Bouts d’humanité
-                </a>
-              </h1>
-            </div>
-          </header>
-
           <div className="header-tools">
             <SearchToggle open={searchOpen} onToggle={() => setSearchOpen((v) => !v)} />
             <ThemeToggle />
@@ -93,10 +82,28 @@ export default function Layout({ children }) {
             <span className="bar" />
             <span className="bar" />
           </button>
+
+          <header className="header">
+            <h1 className="blog-title">
+              <a href="/">
+                <span className="blog-title-text">Suppléments d’âme</span>
+                <img className="title-logo" src="/artboard.png" alt="&" />
+                <span className="blog-title-text">Bouts d’humanité</span>
+              </a>
+            </h1>
+          </header>
         </div>
 
         <nav className="navigation">
           <div className="wrap">
+            <ul className="main-menu">
+              {DESKTOP_NAV.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href}>{item.label}</Link>
+                </li>
+              ))}
+            </ul>
+
             {menuOpen && (
               <ul className="mobile-menu">
                 {MOBILE_NAV.map((item) => (
@@ -106,14 +113,6 @@ export default function Layout({ children }) {
                 ))}
               </ul>
             )}
-
-            <ul className="main-menu">
-              {DESKTOP_NAV.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href}>{item.label}</Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </nav>
 
@@ -126,15 +125,17 @@ export default function Layout({ children }) {
         )}
       </div>
 
-      {/*<div ref={spacerRef} className="topbar-spacer" />*/}
-
-      <figure className="header-visual topbar-spacer">
+      {/*
+      <div ref={spacerRef} className="topbar-spacer" />
+      */}
+      
+      <figure className="header-visual">
         <img src={headerImage} alt="" />
         <span className="header-fade" aria-hidden="true" />
       </figure>
 
       <main>
-        <div className="wrap" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
+        <div className="wrap main-wrap">
           <div className="layout">
             <div className={`content${sidebar ? "" : " no-sidebar"}`}>{children}</div>
             {sidebar ? <Sidebar sidebar={sidebar} /> : null}

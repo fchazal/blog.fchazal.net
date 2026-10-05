@@ -1,0 +1,91 @@
+/* ==========================================================================
+   Webmentions
+   --------------------------------------------------------------------------
+   Réactions (avatars de likes/reposts) et réponses reçues, affichées dans le
+   bandeau latéral des publications.
+   ========================================================================== */
+
+.webmentions {
+  margin-top: 0;
+}
+
+/* Avatars des réactions */
+.wm-faces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.wm-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 900;
+  object-fit: cover;
+}
+
+/* Réponse (citation) */
+.wm-reply {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.wm-reply:last-child {
+  border-bottom: none;
+}
+.wm-reply-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.wm-reply-meta {
+  display: flex;
+  flex-direction: column;
+}
+.wm-reply-meta a {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  color: var(--fg);
+  text-decoration: none;
+}
+.wm-reply-meta time {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted-2);
+}
+.wm-reply-content {
+  margin-top: 10px;
+  white-space: pre-line; /* préserve les sauts de ligne du texte reçu */
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--fg-body);
+}
+.wm-reply-source {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-link);
+  text-decoration: none;
+}
+
+/* Invitation à répondre */
+.wm-respond {
+  margin-top: 1.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted-2);
+}

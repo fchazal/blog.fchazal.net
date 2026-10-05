@@ -1,8 +1,8 @@
-import { listDoodles, listPosts } from "../../src/content/index.js";
+import { listDrawings, listTexts } from "../../src/content/index.js";
 
 export async function data() {
   return {
-    posts: listPosts(),
-    sidebar: { kind: "doodles", doodles: listDoodles() },
+    texts: listTexts(),
+    sidebar: { kind: "drawings", drawings: listDrawings().slice(0, 20) },
   };
 }

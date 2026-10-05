@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Recherche
+   --------------------------------------------------------------------------
+   Champ de recherche (en-tête et page dédiée) et page de résultats.
+   ========================================================================== */
+
+/* ----- Champ + bouton ---------------------------------------------------- */
+.search-form {
+  position: relative;
+}
+.search-field {
+  width: 100%;
+  padding: 1rem 4rem 1rem 1rem; /* place pour le bouton à droite */
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 5px #0001;
+  background: var(--surface-2);
+  color: var(--fg);
+  outline: none;
+}
+.search-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-left: 1px solid var(--line);
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+/* ----- Page de résultats ------------------------------------------------- */
+.search-page {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+.search-count {
+  margin: 1rem 0;
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted-2);
+}
+.search-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.search-results li {
+  border-bottom: 1px solid var(--line-soft);
+}
+.search-results a {
+  display: block;
+  padding: 1rem 0;
+  text-decoration: none;
+}
+/* Type de publication (Texte/Short/Essai/Expérience) */
+.result-type {
+  margin-right: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+.result-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--fg);
+}
+.result-meta {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted-2);
+}
+.result-excerpt {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-body);
+  color: var(--fg-body);
+}

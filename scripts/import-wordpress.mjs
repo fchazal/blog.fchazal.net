@@ -21,7 +21,7 @@ const includeDrafts = args.includes("--drafts");
 const limitArg = args.find((a) => a.startsWith("--limit="));
 const limit = limitArg ? Number(limitArg.split("=")[1]) : Infinity;
 
-const outDir = path.join(root, "content", "posts");
+const outDir = path.join(root, "content", "texts");
 const galleryRoot = path.join(root, "content", "gallery");
 fs.mkdirSync(outDir, { recursive: true });
 

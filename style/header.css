@@ -1,0 +1,141 @@
+/* ==========================================================================
+   En-tête
+   --------------------------------------------------------------------------
+   Barre supérieure fixe en verre dépoli (titre + logo, outils à droite),
+   espaceur qui réserve sa hauteur, et bannière (image + dégradé) en dessous.
+   ========================================================================== */
+
+/* ----- Barre supérieure (fixe, translucide) ------------------------------ */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: box-shadow 0.25s ease;
+  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--surface) 60%, transparent 40%);
+  border-bottom: 1px solid color-mix(in srgb, var(--surface) 70%, transparent 30%);
+}
+
+/* État réduit au scroll */
+.topbar.is-compact {
+  box-shadow: 0 4px 18px #0002;
+}
+
+/* Réserve la hauteur de la barre fixe (mise à jour par ResizeObserver) */
+.topbar-spacer {
+  height: 216px;
+}
+
+/* ----- Titre + logo ------------------------------------------------------ */
+.header-wrap {
+  position: relative;
+  text-align: center;
+}
+
+.header {
+  padding: 2rem 4rem; /* marge latérale pour ne pas passer sous les outils */
+  transition: padding 0.25s ease;
+}
+.topbar.is-compact .header {
+  padding: 0.4rem 4rem;
+}
+
+.blog-title {
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: 2.25em;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+  transition: font-size 0.25s ease;
+}
+.topbar.is-compact .blog-title {
+  font-size: 1.5em;
+}
+/* Le titre et le logo s'enroulent et restent centrés */
+.blog-title a {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1em;
+  color: var(--fg);
+  text-decoration: none;
+}
+.blog-title a:hover {
+  text-decoration: none;
+}
+/* Logo inséré à la place du « & » */
+.title-logo {
+  display: inline-block;
+  height: 0.8em;
+  width: auto;
+  margin: 0 0.18em;
+  border-radius: 50%;
+  vertical-align: -0.08em;
+}
+
+/* ----- Outils (recherche + thème), en haut à droite ---------------------- */
+.header-tools {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.topbar.is-compact .header-tools {
+  top: 0.5rem;
+  gap: 0.25rem;
+}
+.tool-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--fg);
+  background: var(--bg);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+.topbar.is-compact .tool-btn {
+  width: 30px;
+  height: 30px;
+}
+.tool-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-dark);
+}
+.tool-btn svg {
+  display: block;
+}
+
+/* ----- Bannière (image + fondu vers le fond) ----------------------------- */
+.header-visual {
+  position: relative;
+  width: 100%;
+  height: clamp(220px, 32vw, 420px);
+  margin: 0;
+  overflow: hidden;
+}
+.header-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Dégradé en haut pour fondre l'image dans l'en-tête */
+.header-fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, white 0%, transparent 50%);
+}

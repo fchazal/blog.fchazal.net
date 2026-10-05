@@ -1,0 +1,109 @@
+/* ==========================================================================
+   Navigation
+   --------------------------------------------------------------------------
+   Menu principal (desktop) et burger + menu déroulant (très petit écran),
+   plus le champ de recherche dépliable de l'en-tête.
+   ========================================================================== */
+
+/* ----- Bouton burger (affiché uniquement sur très petit écran) ----------- */
+.nav-toggle {
+  position: absolute;
+  top: 0.75rem;
+  left: 1rem;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.nav-toggle .bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--fg);
+}
+
+/* ----- Menu principal (desktop) ------------------------------------------ */
+.main-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  justify-content: center;
+  font-size: 1em;
+  font-weight: 200;
+}
+.main-menu li {
+  margin: 0;
+}
+.main-menu a {
+  color: var(--fg);
+  padding: 5px 10px;
+  border-radius: 10px 10px 0 0;
+  text-decoration: none;
+}
+/* Lien survolé / actif */
+.main-menu li:hover > a,
+.main-menu a.is-active {
+  color: var(--accent);
+  background-color: var(--surface);
+  box-shadow: 0 0 8px #0001;
+}
+/* Léger décalage quand la barre est réduite */
+.is-compact .main-menu {
+  margin-top: 10px;
+}
+
+/* ----- Menu déroulant (mobile) ------------------------------------------- */
+.mobile-menu {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+.mobile-menu li {
+  border-top: 1px solid var(--line-soft);
+}
+.mobile-menu li:first-child {
+  border-top: none;
+}
+.mobile-menu a {
+  display: block;
+  padding: 1rem 0.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.9em;
+  text-decoration: none;
+}
+
+/* ----- Recherche de l'en-tête (dépliable) -------------------------------- */
+.top-search {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 1rem 0;
+}
+
+/* ==========================================================================
+   Mobile (en bas)
+   ========================================================================== */
+
+/* Très petit écran : burger visible, menu principal masqué */
+@media (max-width: 640px) {
+  .nav-toggle {
+    display: flex;
+  }
+  .main-menu {
+    display: none;
+  }
+}
+
+/* Au-delà : menu déroulant masqué */
+@media (min-width: 641px) {
+  .mobile-menu {
+    display: none;
+  }
+}

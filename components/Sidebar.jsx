@@ -2,15 +2,14 @@ import { LikeButton } from "./LikeButton.jsx";
 import { ShareButtons } from "./ShareButtons.jsx";
 import { Webmentions } from "./Webmentions.jsx";
 
-function SidebarDoodles({ doodles }) {
-  const items = (doodles || []);
-  console.log(doodles.length);
+function SidebarDrawings({ drawings }) {
+  const items = drawings || [];
   if (items.length === 0) return null;
   return (
     <div className="sidebar-doodles">
-      {items.map((doodle) => (
-        <a key={doodle.url} href={doodle.url} title={doodle.date}>
-          <img src={doodle.src} alt="" loading="lazy" />
+      {items.map((drawing) => (
+        <a key={drawing.url} href={drawing.url} title={drawing.date}>
+          <img src={drawing.src} alt="" loading="lazy" />
         </a>
       ))}
     </div>
@@ -65,7 +64,9 @@ export function Sidebar({ sidebar }) {
 
   return (
     <aside className={`sidebar sidebar--${sidebar.kind}`}>
-      {sidebar.kind === "doodles" && <SidebarDoodles doodles={sidebar.doodles} />}
+      {sidebar.kind === "drawings" && (
+        <SidebarDrawings drawings={sidebar.drawings} />
+      )}
       {sidebar.kind === "tags" && (
         <SidebarTags
           tags={sidebar.tags}

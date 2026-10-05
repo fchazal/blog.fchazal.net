@@ -3,8 +3,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const postsDir = path.join(root, "content", "posts");
-const codeDir = path.join(root, "content", "code");
+const postsDir = path.join(root, "content", "texts");
+const codeDir = path.join(root, "content", "experiments");
 
 const IMG = /\.(jpe?g|png|webp|gif|avif)$/i;
 
@@ -31,7 +31,7 @@ for (const entry of fs.readdirSync(postsDir, { withFileTypes: true })) {
   }
 }
 
-/* Code : aplatir (base.md + base.js à la racine de content/code) */
+/* Code : aplatir (base.md + base.js à la racine de content/experiments) */
 for (const entry of fs.readdirSync(codeDir, { withFileTypes: true })) {
   if (!entry.isDirectory()) continue;
   const base = entry.name;

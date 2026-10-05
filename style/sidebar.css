@@ -1,0 +1,142 @@
+/* ==========================================================================
+   Bandeau latéral
+   --------------------------------------------------------------------------
+   Contenu contextuel selon la vue :
+   - accueil        -> dessins (grille 2×2)
+   - collection     -> catégories (pilules)
+   - publication    -> réactions (like + partage)
+   Le passage sous le contenu sur mobile est géré dans layout.css.
+   ========================================================================== */
+
+/* ----- Widget : dessins récents ------------------------------------------ */
+.sidebar-doodles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.sidebar-doodles a {
+  display: block;
+  line-height: 0;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 4px #0002;
+}
+.sidebar-doodles a:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px #0003;
+  position: relative;
+  z-index: 3;
+}
+.sidebar-doodles img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #fff;
+}
+
+/* ----- Titre de widget --------------------------------------------------- */
+.widget-title {
+  display: inline-block;
+  margin: 0 0 1rem;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--accent);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+
+/* ----- Widget : catégories (pilules) ------------------------------------- */
+.sidebar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+/* Style partagé des pilules (catégories + partage) */
+.tag-pill,
+.share-btn {
+  display: inline-flex;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--muted);
+  padding: 8px 14px;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+.tag-pill:hover,
+.share-btn:hover {
+  color: var(--accent-link);
+  border-color: var(--accent-link);
+}
+.tag-pill.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-dark);
+}
+.tag-pill span {
+  opacity: 0.6;
+  font-weight: 200;
+}
+
+/* ----- Bouton « J'aime » ------------------------------------------------- */
+.like-button {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--fg);
+  padding: 12px 16px;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+.like-button:hover:not(:disabled) {
+  color: var(--accent-link);
+  border-color: var(--accent-link);
+}
+.like-button.is-liked {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-dark);
+}
+.like-button svg {
+  display: block;
+}
+
+/* ----- Widget : partage -------------------------------------------------- */
+.share {
+  margin-top: 20px;
+}
+.share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   Mobile (en bas)
+   ========================================================================== */
+@media (max-width: 640px) {
+  /* Dessins sur 3 colonnes quand le bandeau passe sous le contenu */
+  .sidebar-doodles {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

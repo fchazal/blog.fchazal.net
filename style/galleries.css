@@ -1,0 +1,195 @@
+/* ==========================================================================
+   Galeries
+   --------------------------------------------------------------------------
+   - Expériences p5.js : grille de cartes + cadre de l'œuvre.
+   - Dessins : galerie horizontale (page), visionneuse (détail).
+   ========================================================================== */
+
+/* ----- Expériences p5.js : grille ---------------------------------------- */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+}
+.work-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  text-decoration: none;
+  box-shadow: 0 0 20px #0002;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.work-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 26px #0003;
+}
+/* Vignette de repli : dégradé + initiale */
+.work-card-canvas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 170px;
+  background: linear-gradient(135deg, #1c1a15 0%, #ba0d0d 130%);
+  color: #f0eadc;
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+}
+/* Vignette réelle (image de même nom que le .md) */
+.work-card-image {
+  display: block;
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+.work-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+}
+.work-card-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--fg);
+}
+.work-card-date {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted-2);
+}
+.work-card-excerpt {
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--fg-body);
+}
+
+/* ----- Œuvre p5.js (détail) ---------------------------------------------- */
+.work-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 1.25rem;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0d0d10;
+}
+.work-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ----- Dessins : galerie horizontale ------------------------------------- */
+.doodle-scroller {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 12px;
+  scrollbar-width: none; /* scrollbar masquée */
+}
+.doodle-scroller::-webkit-scrollbar {
+  display: none;
+}
+.doodle-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display: block;
+  line-height: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+/* Zoom + ombre au survol */
+.doodle-item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px #0003;
+  position: relative;
+  z-index: 3;
+}
+.doodle-item img {
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+}
+/* Taille « page » */
+.doodle-page .doodle-item img {
+  width: 340px;
+  height: 340px;
+}
+.doodle-caption {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted-2);
+}
+
+/* ----- Dessin (détail : grande image + bandeau) -------------------------- */
+.doodle-stage {
+  display: flex;
+  justify-content: center;
+}
+.doodle-stage img {
+  max-width: 100%;
+  max-height: 72vh;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px #0003;
+}
+.doodle-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 6px 2px;
+  scrollbar-width: none;
+}
+.doodle-strip::-webkit-scrollbar {
+  display: none;
+}
+.doodle-strip a {
+  flex: 0 0 auto;
+  line-height: 0;
+  opacity: 0.5;
+  border-radius: 8px;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.doodle-strip a:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+/* Dessin courant */
+.doodle-strip a.is-current {
+  opacity: 1;
+  box-shadow: 0 0 0 2px var(--accent-link);
+}
+.doodle-strip img {
+  display: block;
+  width: 86px;
+  height: 86px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+/* Like sous un dessin */
+.doodle-actions {
+  max-width: 20rem;
+  margin: 1.5rem auto 0;
+}
+
+/* ==========================================================================
+   Mobile (en bas)
+   ========================================================================== */
+@media (max-width: 640px) {
+  .doodle-page .doodle-item img {
+    width: 240px;
+    height: 240px;
+  }
+}

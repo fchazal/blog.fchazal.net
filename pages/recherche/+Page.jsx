@@ -3,7 +3,12 @@ import { useData } from "vike-react/useData";
 import { SearchForm } from "../../components/Search.jsx";
 import { formatDateFr } from "../../components/format.js";
 
-const TYPE_LABEL = { post: "Texte", essay: "Essai", code: "Code" };
+const TYPE_LABEL = {
+  text: "Texte",
+  short: "Short",
+  essay: "Essai",
+  experiment: "Expérience",
+};
 
 export default function Page() {
   const { query, results } = useData();

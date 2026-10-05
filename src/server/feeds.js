@@ -1,8 +1,9 @@
 import {
-  listCode,
-  listDoodles,
+  listDrawings,
   listEssays,
-  listPosts,
+  listExperiments,
+  listShorts,
+  listTexts,
 } from "../content/index.js";
 
 export const SITE_TITLE = "Suppléments d’âme & Bouts d’humanité";
@@ -32,7 +33,7 @@ function absolute(path) {
 }
 
 function itemDate(item) {
-  if (item.type === "doodle" && item.publishedAt) {
+  if (item.type === "drawing" && item.publishedAt) {
     const date = new Date(item.publishedAt);
     if (!Number.isNaN(date.getTime())) return date;
   }
@@ -40,7 +41,7 @@ function itemDate(item) {
 }
 
 function titleOf(item) {
-  if (item.type === "doodle") return `Dessin du ${item.date}`;
+  if (item.type === "drawing") return `Dessin du ${item.date}`;
   return item.title;
 }
 
@@ -62,10 +63,11 @@ export function collectEntries(type = "all") {
     });
   };
 
-  if (type === "all" || type === "post") listPosts().forEach((e) => add("post", e));
+  if (type === "all" || type === "text") listTexts().forEach((e) => add("text", e));
+  if (type === "all" || type === "short") listShorts().forEach((e) => add("short", e));
   if (type === "all" || type === "essay") listEssays().forEach((e) => add("essay", e));
-  if (type === "all" || type === "code") listCode().forEach((e) => add("code", e));
-  if (type === "all" || type === "doodle") listDoodles().forEach((e) => add("doodle", e));
+  if (type === "all" || type === "experiment") listExperiments().forEach((e) => add("experiment", e));
+  if (type === "all" || type === "drawing") listDrawings().forEach((e) => add("drawing", e));
 
   return items.sort((a, b) => itemDate(b) - itemDate(a));
 }
@@ -157,8 +159,9 @@ export function buildJsonFeed({
 /** Définition des flux servis par le serveur. */
 export const FEED_DEFINITIONS = [
   { type: "all", rss: "/feed.xml", json: "/feed.json", title: SITE_TITLE, description: SITE_DESCRIPTION, link: "/" },
-  { type: "post", rss: "/posts/feed.xml", json: "/posts/feed.json", title: `${SITE_TITLE} — Textes`, description: SITE_DESCRIPTION, link: "/posts" },
+  { type: "text", rss: "/texts/feed.xml", json: "/texts/feed.json", title: `${SITE_TITLE} — Textes`, description: SITE_DESCRIPTION, link: "/texts" },
+  { type: "short", rss: "/shorts/feed.xml", json: "/shorts/feed.json", title: `${SITE_TITLE} — Shorts`, description: SITE_DESCRIPTION, link: "/shorts" },
   { type: "essay", rss: "/essays/feed.xml", json: "/essays/feed.json", title: `${SITE_TITLE} — Essais`, description: SITE_DESCRIPTION, link: "/essays" },
-  { type: "code", rss: "/code/feed.xml", json: "/code/feed.json", title: `${SITE_TITLE} — Code`, description: SITE_DESCRIPTION, link: "/code" },
-  { type: "doodle", rss: "/doodles/feed.xml", json: "/doodles/feed.json", title: `${SITE_TITLE} — Dessins`, description: SITE_DESCRIPTION, link: "/doodles" },
+  { type: "experiment", rss: "/experiments/feed.xml", json: "/experiments/feed.json", title: `${SITE_TITLE} — Expériences`, description: SITE_DESCRIPTION, link: "/experiments" },
+  { type: "drawing", rss: "/drawings/feed.xml", json: "/drawings/feed.json", title: `${SITE_TITLE} — Dessins`, description: SITE_DESCRIPTION, link: "/drawings" },
 ];

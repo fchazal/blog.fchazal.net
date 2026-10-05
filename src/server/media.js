@@ -22,7 +22,7 @@ const MIME = {
 
 /**
  * Expose les fichiers de `content/` en lecture, sous `/media/`.
- * Ex: content/posts/20260504-a-nouveau.jpg -> /media/posts/20260504-a-nouveau.jpg
+ * Ex: content/texts/20260504-a-nouveau.jpg -> /media/texts/20260504-a-nouveau.jpg
  *
  * Note : on n'utilise pas `@fastify/static` car ses réponses 304 (requêtes
  * conditionnelles) ne sont pas convertibles en `Response` par l'adaptateur

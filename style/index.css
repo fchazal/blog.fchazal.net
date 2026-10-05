@@ -1,0 +1,21 @@
+/* ==========================================================================
+   fchazal.net — point d'entrée des styles
+   --------------------------------------------------------------------------
+   Chaque « zone » du layout vit dans son propre fichier (`pages/styles/*.css`).
+   Les règles de responsive (mobile) sont placées EN BAS de chaque fichier.
+
+   Ordre d'import = ordre de la cascade : variables → reset → zones.
+   ========================================================================== */
+
+@import "./variables.css"; /* jetons de design : couleurs, polices, thème sombre */
+@import "./reset.css"; /* reset + styles des éléments HTML de base */
+@import "./layout.css"; /* structure générale : .site, .wrap, .layout, colonnes */
+@import "./header.css"; /* topbar fixe, titre + logo, outils, bannière */
+@import "./navigation.css"; /* burger, menu principal/mobile, recherche d'en-tête */
+@import "./posts.css"; /* cartes d'article, fiche date, images, contenu riche */
+@import "./galleries.css"; /* galeries : expériences p5.js et dessins */
+@import "./sidebar.css"; /* bandeau latéral : dessins, catégories, réactions */
+@import "./webmentions.css"; /* réactions et réponses (Webmentions) */
+@import "./reader.css"; /* chevrons de lecture + barre de progression */
+@import "./search.css"; /* champ de recherche + page de résultats */
+@import "./footer.css"; /* pied de page */

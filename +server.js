@@ -1,3 +1,5 @@
+import "./src/server/load-env.js";
+
 import vike, { toFetchHandler } from "@vikejs/fastify";
 import fastify from "fastify";
 import rawBody from "fastify-raw-body";

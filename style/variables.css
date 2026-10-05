@@ -1,0 +1,61 @@
+/* ==========================================================================
+   Variables — jetons de design
+   --------------------------------------------------------------------------
+   Toutes les couleurs/polices sont déclarées ici en variables CSS (custom
+   properties). Le thème sombre ne fait que redéfinir ces mêmes variables :
+   aucune règle de composant n'a besoin d'un bloc « dark ».
+   ========================================================================== */
+
+/* ----- Thème clair (par défaut) ------------------------------------------ */
+:root {
+  /* Accent (rouge sceau) */
+  --accent: #ba0d0d; /* aplats pleins (boutons actifs, traits) */
+  --accent-link: #ba0d0d; /* couleur des liens (varie en sombre) */
+
+  /* Texte */
+  --fg: #111; /* texte principal */
+  --fg-soft: #333; /* texte secondaire */
+  --fg-body: #555; /* corps de texte */
+  --muted: #666; /* texte atténué */
+  --muted-2: #999; /* métadonnées (dates, catégories) */
+  --faint: #bbb; /* séparateurs légers */
+
+  /* Surfaces */
+  --bg: #fafafa; /* fond de page */
+  --surface: #fff; /* cartes, barres */
+  --surface-2: #f2f2f2; /* surface alternée (pilules, champs) */
+  --line: #ddd; /* bordures */
+  --line-soft: #eee; /* bordures très légères */
+
+  /* Divers */
+  --ink: #111; /* fond très sombre (pied de page) */
+  --on-dark: #fff; /* texte/icône sur fond sombre */
+  --glass: rgba(255, 255, 255, 0.92); /* fond translucide (chevrons) */
+
+  /* Polices */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Petrona", Georgia, serif;
+  --font-ui: "Lato", Helvetica, sans-serif;
+}
+
+/* ----- Thème sombre ------------------------------------------------------ */
+html[data-theme="dark"] {
+  color-scheme: dark; /* formulaires/scrollbars natifs en sombre */
+
+  --accent-link: #d9605c; /* accent plus clair pour la lisibilité */
+
+  --fg: #ddd6c8;
+  --fg-soft: #bdb5a5;
+  --fg-body: #cdc6b8;
+  --muted: #8d8578;
+  --muted-2: #9a9285;
+  --faint: #4a463f;
+
+  --bg: #14120e;
+  --surface: #1c1a15;
+  --surface-2: #201d18;
+  --line: #2e2b25;
+  --line-soft: #2a2721;
+
+  --glass: rgba(28, 26, 21, 0.92);
+}
