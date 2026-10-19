@@ -11,7 +11,7 @@
 @import "./reset.css"; /* reset + styles des éléments HTML de base */
 @import "./layout.css"; /* structure générale : .site, .wrap, .layout, colonnes */
 @import "./header.css"; /* topbar fixe, titre + logo, outils, bannière */
-@import "./navigation.css"; /* burger, menu principal/mobile, recherche d'en-tête */
+@import "./navigation.css"; /* types de publication flottants, recherche d'en-tête */
 @import "./posts.css"; /* cartes d'article, fiche date, images, contenu riche */
 @import "./galleries.css"; /* galeries : expériences p5.js et dessins */
 @import "./sidebar.css"; /* bandeau latéral : dessins, catégories, réactions */

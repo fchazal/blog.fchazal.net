@@ -149,6 +149,7 @@
   display: flex;
   gap: 10px;
   overflow-x: auto;
+  margin-bottom: 1.25rem;
   padding: 6px 2px;
   scrollbar-width: none;
 }
@@ -175,7 +176,9 @@
   display: block;
   width: 86px;
   height: 86px;
-  object-fit: cover;
+  padding: 4px;
+  object-fit: contain;
+  background: #fff;
   border-radius: 8px;
 }
 /* Like sous un dessin */

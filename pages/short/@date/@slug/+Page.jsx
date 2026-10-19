@@ -9,8 +9,8 @@ export default function Page() {
   if (!short) {
     return (
       <>
-        <h1 className="post-title">Short introuvable</h1>
-        <p className="post-content">Ce short n’existe pas ou n’est pas encore publié.</p>
+        <h1 className="post-title">Brève introuvable</h1>
+        <p className="post-content">Cette brève n’existe pas ou n’est pas encore publiée.</p>
       </>
     );
   }
@@ -18,7 +18,7 @@ export default function Page() {
   return (
     <>
       <ReaderNav prev={prev} next={next} />
-      <PostCard entry={short} headingLevel={1} />
+      <PostCard entry={short} headingLevel={1} variant="short" />
     </>
   );
 }

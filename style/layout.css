@@ -48,6 +48,10 @@ main {
   .content.no-sidebar {
     width: 100%;
   }
+  /* Pas de remontée sous la bannière quand elle est masquée */
+  .site.no-header-visual .content {
+    margin-top: 0;
+  }
   .sidebar {
     width: 26.3%;
   }

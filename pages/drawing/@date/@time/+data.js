@@ -19,6 +19,6 @@ export async function data(pageContext) {
     prev,
     next,
     likeCount: drawing ? countLikes(drawing.url) : 0,
-    headerImage: drawing ? drawing.src : undefined,
+    hideHeaderVisual: true,
   };
 }

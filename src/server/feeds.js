@@ -160,7 +160,7 @@ export function buildJsonFeed({
 export const FEED_DEFINITIONS = [
   { type: "all", rss: "/feed.xml", json: "/feed.json", title: SITE_TITLE, description: SITE_DESCRIPTION, link: "/" },
   { type: "text", rss: "/texts/feed.xml", json: "/texts/feed.json", title: `${SITE_TITLE} — Textes`, description: SITE_DESCRIPTION, link: "/texts" },
-  { type: "short", rss: "/shorts/feed.xml", json: "/shorts/feed.json", title: `${SITE_TITLE} — Shorts`, description: SITE_DESCRIPTION, link: "/shorts" },
+  { type: "short", rss: "/shorts/feed.xml", json: "/shorts/feed.json", title: `${SITE_TITLE} — Brèves`, description: SITE_DESCRIPTION, link: "/shorts" },
   { type: "essay", rss: "/essays/feed.xml", json: "/essays/feed.json", title: `${SITE_TITLE} — Essais`, description: SITE_DESCRIPTION, link: "/essays" },
   { type: "experiment", rss: "/experiments/feed.xml", json: "/experiments/feed.json", title: `${SITE_TITLE} — Expériences`, description: SITE_DESCRIPTION, link: "/experiments" },
   { type: "drawing", rss: "/drawings/feed.xml", json: "/drawings/feed.json", title: `${SITE_TITLE} — Dessins`, description: SITE_DESCRIPTION, link: "/drawings" },

@@ -4,5 +4,5 @@ import { PostFeed } from "../../components/PostFeed.jsx";
 
 export default function Page() {
   const { items } = useData();
-  return <PostFeed items={items} showTags={true} />;
+  return <PostFeed items={items} showTags={false} variant="short" />;
 }

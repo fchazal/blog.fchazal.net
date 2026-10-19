@@ -88,7 +88,8 @@
   text-decoration: none;
 }
 .post-title a:hover {
-  text-decoration: underline;
+  color: var(--accent);
+  text-decoration: none;
 }
 
 /* Métadonnées (date) */
@@ -173,6 +174,18 @@
 /* ----- Contenu Markdown -------------------------------------------------- */
 .post-content {
   margin-top: 1.25rem;
+}
+.post--short .post-content {
+  margin-top: 0;
+}
+.short-date {
+  display: block;
+  margin-top: 1rem;
+  text-align: right;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--muted);
 }
 .post-content p {
   font-family: var(--font-body);

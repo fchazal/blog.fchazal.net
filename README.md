@@ -1,7 +1,7 @@
 # fchazal.net
 
 **Suppléments d'âme & Bouts d'humanité** — carnet littéraire auto-hébergé :
-textes, shorts (haïkus), essais, dessins et expériences génératives (p5.js).
+textes, brèves (haïkus), essais, dessins et expériences génératives (p5.js).
 
 Rendu **côté serveur** (SSR), contenu en **Markdown**, thème clair/sombre,
 recherche, flux RSS/JSON, Webmentions et likes.
@@ -26,7 +26,7 @@ recherche, flux RSS/JSON, Webmentions et likes.
 
 - **5 types de publication** :
   - `text` — textes (poésie / prose),
-  - `short` — formats courts (haïkus, aphorismes),
+  - `short` — brèves (haïkus, aphorismes),
   - `essay` — articles longs,
   - `experiment` — œuvres p5.js,
   - `drawing` — dessins.
@@ -152,7 +152,7 @@ Le fichier `.env` est chargé automatiquement au démarrage.
 |---|---|
 | `/` | Accueil (flux de textes) |
 | `/texts`, `/text/:date/:slug` | Textes |
-| `/shorts`, `/short/:date/:slug` | Shorts |
+| `/shorts`, `/short/:date/:slug` | Brèves |
 | `/essays`, `/essay/:date/:slug` | Essais |
 | `/experiments`, `/experiment/:date/:slug` | Expériences p5.js |
 | `/drawings`, `/drawing/:date/:id` | Dessins |

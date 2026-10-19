@@ -1,8 +1,8 @@
 /* ==========================================================================
    En-tête
    --------------------------------------------------------------------------
-   Barre supérieure fixe en verre dépoli (titre + logo, outils à droite),
-   espaceur qui réserve sa hauteur, et bannière (image + dégradé) en dessous.
+   Barre supérieure fixe en verre dépoli (titre + logo, outils à droite)
+   et bannière (image + dégradé) en dessous.
    ========================================================================== */
 
 /* ----- Barre supérieure (fixe, translucide) ------------------------------ */
@@ -18,11 +18,6 @@
    color-mix(in srgb, var(--surface) 60%, transparent 40%) 100%);
   border-bottom: 1px solid color-mix(in srgb, var(--surface) 70%, transparent 30%);
 }
-/* Réserve la hauteur de la barre fixe (mise à jour par ResizeObserver) */
-.topbar-spacer {
-  height: 216px;
-}
-
 /* ----- Titre + logo ------------------------------------------------------ */
 .header-wrap {
   position: relative;
@@ -101,6 +96,11 @@
   color: var(--on-dark);
 }
 
+
+/* ----- Espace réservé quand la bannière est masquée ---------------------- */
+.header-spacer {
+  height: calc(var(--topbar-height, 216px) + 4.5rem);
+}
 
 /* ----- Bannière (image + fondu vers le fond) ----------------------------- */
 .header-visual {

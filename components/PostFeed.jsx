@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { PostCard } from "./PostCard.jsx";
 
 /** Flux d'articles/essais : chargement progressif + apparition latérale. */
-export function PostFeed({ items, pageSize = 6, showTags = false }) {
+export function PostFeed({ items, pageSize = 6, showTags = false, variant = "default" }) {
   const [visible, setVisible] = useState(pageSize);
   const sentinelRef = useRef(null);
   const visibleRef = useRef(visible);
@@ -50,7 +50,7 @@ export function PostFeed({ items, pageSize = 6, showTags = false }) {
             key={item.url}
             style={{ animationDelay: `${Math.min(index, 6) * 45}ms` }}
           >
-            <PostCard entry={item} showTags={showTags} />
+            <PostCard entry={item} showTags={showTags} variant={variant} />
           </div>
         ))}
       </div>

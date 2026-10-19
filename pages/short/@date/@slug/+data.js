@@ -11,7 +11,7 @@ export async function data(pageContext) {
   const { prev, next } = adjacentInList(shorts, short?.url);
 
   const config = useConfig();
-  config({ title: short ? short.title : "Short introuvable" });
+  config({ title: short ? short.title : "Brève introuvable" });
 
   const webmentions = short ? await getWebmentions(`/short/${date}/${slug}`) : null;
   const likeCount = short ? countLikes(short.url) : 0;

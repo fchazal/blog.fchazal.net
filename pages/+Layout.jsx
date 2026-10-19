@@ -10,20 +10,12 @@ import { Link } from "../components/Link.jsx";
 
 import "../style/index.css";
 
-const DESKTOP_NAV = [
-  { href: "/texts", label: "Textes" },
-  { href: "/shorts", label: "Shorts" },
-  { href: "/essays", label: "Essais" },
-  { href: "/experiments", label: "Expériences" },
-//  { href: "/about", label: "À propos" },
-];
-
-const MOBILE_NAV = [
-  { href: "/texts", label: "Textes" },
-  { href: "/shorts", label: "Shorts" },
-  { href: "/essays", label: "Essais" },
-  { href: "/drawings", label: "Dessins" },
-  { href: "/experiments", label: "Expériences" },
+const PAGE_TYPES = [
+  { href: "/texts", label: "Textes", match: ["/texts", "/text/"] },
+  { href: "/shorts", label: "Brèves", match: ["/shorts", "/short/"] },
+  { href: "/essays", label: "Essais", match: ["/essays", "/essay/"] },
+  { href: "/experiments", label: "Expériences", match: ["/experiments", "/experiment/"] },
+  { href: "/drawings", label: "Dessins", match: ["/drawings", "/drawing/"] },
 //  { href: "/about", label: "À propos" },
 ];
 
@@ -31,14 +23,13 @@ export default function Layout({ children }) {
   const pageContext = usePageContext();
   const data = pageContext.data || {};
   const headerImage = data.headerImage || "/site-header.jpg";
+  const hideHeaderVisual = data.hideHeaderVisual === true;
   const sidebar = data.sidebar || null;
 
-  const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [compact, setCompact] = useState(false);
 
   const topbarRef = useRef(null);
-  const spacerRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setCompact(window.scrollY > 90);
@@ -49,19 +40,22 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     const topbar = topbarRef.current;
-    const spacer = spacerRef.current;
-    if (!topbar || !spacer) return;
+    if (!topbar) return;
+    const root = document.documentElement;
     const sync = () => {
-      spacer.style.height = `${topbar.offsetHeight}px`;
+      root.style.setProperty("--topbar-height", `${topbar.offsetHeight}px`);
     };
     sync();
     const observer = new ResizeObserver(sync);
     observer.observe(topbar);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--topbar-height");
+    };
   }, []);
 
   return (
-    <div className="site">
+    <div className={`site${hideHeaderVisual ? " no-header-visual" : ""}`}>
       <ScrollProgress />
 
       <div ref={topbarRef} className={`topbar${compact ? " is-compact" : ""}`}>
@@ -70,18 +64,6 @@ export default function Layout({ children }) {
             <SearchToggle open={searchOpen} onToggle={() => setSearchOpen((v) => !v)} />
             <ThemeToggle />
           </div>
-
-          <button
-            type="button"
-            className="nav-toggle"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-expanded={menuOpen}
-            aria-label="Ouvrir le menu"
-          >
-            <span className="bar" />
-            <span className="bar" />
-            <span className="bar" />
-          </button>
 
           <header className="header">
             <h1 className="blog-title">
@@ -94,28 +76,6 @@ export default function Layout({ children }) {
           </header>
         </div>
 
-        <nav className="navigation">
-          <div className="wrap">
-            <ul className="main-menu">
-              {DESKTOP_NAV.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href}>{item.label}</Link>
-                </li>
-              ))}
-            </ul>
-
-            {menuOpen && (
-              <ul className="mobile-menu">
-                {MOBILE_NAV.map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href}>{item.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </nav>
-
         {searchOpen && (
           <div className="top-search">
             <div className="wrap">
@@ -125,14 +85,24 @@ export default function Layout({ children }) {
         )}
       </div>
 
-      {/*
-      <div ref={spacerRef} className="topbar-spacer" />
-      */}
-      
-      <figure className="header-visual">
-        <img src={headerImage} alt="" />
-        <span className="header-fade" aria-hidden="true" />
-      </figure>
+      <nav className="page-types-bar" aria-label="Types de publications">
+        <ul className="page-types">
+          {PAGE_TYPES.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} match={item.match}>{item.label}</Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {hideHeaderVisual ? (
+        <div className="header-spacer" aria-hidden="true" />
+      ) : (
+        <figure className="header-visual">
+          <img src={headerImage} alt="" />
+          <span className="header-fade" aria-hidden="true" />
+        </figure>
+      )}
 
       <main className="wrap main-wrap">
         <div className="layout">

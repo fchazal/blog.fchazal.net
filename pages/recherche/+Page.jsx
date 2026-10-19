@@ -5,7 +5,7 @@ import { formatDateFr } from "../../components/format.js";
 
 const TYPE_LABEL = {
   text: "Texte",
-  short: "Short",
+  short: "Brève",
   essay: "Essai",
   experiment: "Expérience",
 };

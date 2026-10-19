@@ -28,7 +28,7 @@ body::-webkit-scrollbar {
 body {
   margin: 0;
   padding: 0;
-  background: var(--surface);
+  background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
