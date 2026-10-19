@@ -91,31 +91,20 @@
   text-decoration: underline;
 }
 
-/* Catégories, sous le titre */
-.post-categories {
-  margin: 0.6rem 0 0;
-  font-family: var(--font-ui);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--muted-2);
-}
-.post-categories a {
-  color: var(--muted-2);
-  text-decoration: none;
-}
-.post-categories a:hover {
-  color: var(--accent-link);
-}
-
 /* Métadonnées (date) */
 .post-meta {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   border-top: 1px solid var(--line);
+  font-family: var(--font-ui);
 }
 .post-meta p {
+  display: inline-block;
+  margin: 0;
   color: var(--muted);
 }
 .post-meta a {
@@ -125,6 +114,23 @@
 }
 .post-meta p + p:before {
   color: var(--faint);
+}
+
+.post-date {
+  padding-right: .4em;
+}
+
+/* Catégories, sous le titre */
+.post-categories {
+  margin: 0.6rem 0 0;
+  color: var(--muted-2);
+}
+.post-categories a {
+  color: var(--muted-2);
+  text-decoration: none;
+}
+.post-categories a:hover {
+  color: var(--accent-link);
 }
 
 /* ----- Fiche calendrier (date) ------------------------------------------- */
@@ -260,7 +266,6 @@
 @media (max-width: 640px) {
   .post {
     border-radius: 0;
-    box-shadow: none;
   }
   .post-thumb img {
     width: 150px;

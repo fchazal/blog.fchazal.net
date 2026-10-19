@@ -75,24 +75,25 @@ Le contenu vit dans `content/` — ou dans un autre dossier via `CONTENT_PATH`
 ```
 content/
 ├── texts/
-│   ├── 20260504-a-nouveau.md        # YYYYMMDD-slug.md
-│   └── 20260504-a-nouveau.jpg       # image de couverture (même nom)
+│   └── 20260504-a-nouveau/
+│       ├── index.md                 # YYYYMMDD-slug/index.md
+│       └── image.jpg                # images de l'article (dans le dossier)
 ├── shorts/
-│   └── 20260601-haiku.md
+│   └── 20260601-haiku/
+│       └── index.md
 ├── essays/
-│   └── 20260110-sur-la-gravure.md
+│   └── 20260110-sur-la-gravure/
+│       └── index.md
 ├── experiments/
-│   ├── 20260615-flux.md             # métadonnées
-│   ├── 20260615-flux.js             # sketch p5.js
-│   ├── 20260615-flux.png            # vignette (optionnelle, même nom)
-│   └── publication.yml              # registre de publication
+│   └── 20260615-flux/
+│       ├── index.md                 # métadonnées
+│       ├── 20260615-flux.js         # sketch p5.js
+│       └── 20260615-flux.png        # vignette (optionnelle)
 ├── drawings/
-│   ├── 20260615-1430.jpg            # YYYYMMDD-hhmm[ss].ext
-│   └── publication.yml
-├── gallery/                         # images de galerie (multi-images)
-│   └── 20200802-quimperle-au-soleil/…
-└── pages/
-    └── about.md
+│   └── 20260615-01/
+│       ├── index.md                 # YYYYMMDD-NN/index.md
+│       └── image.jpg
+└── about.md
 ```
 
 ### Frontmatter
@@ -100,21 +101,20 @@ content/
 ```yaml
 ---
 title: "À nouveau"
+slug: a-nouveau
+created: 2026-05-04
+published:
 tags: [démons, pensées]
-status: published        # draft | scheduled | published
+status: false            # false / draft = brouillon ; true / published = publié
 description: "Résumé court"   # optionnel
-date: 2026-05-04              # optionnel (sinon déduit du nom / mtime)
 ---
 ```
 
-- **Une image seule** → fichier de couverture à la racine, même nom que l'article
-  (`YYYYMMDD-slug.jpg`).
-- **Plusieurs images** → dossier `content/gallery/YYYYMMDD-slug/`.
-- `publication.yml` (dans `drawings/` et `experiments/`) confirme la publication :
-  ```yaml
-  published:
-    20260615-1430.jpg: "2026-06-15T14:30:00+02:00"
-  ```
+- Chaque publication vit dans un dossier `YYYYMMDD-slug/` contenant un `index.md`.
+- Toutes les images du dossier sont affichées en galerie ; la première sert de
+  couverture.
+- Les dossiers en `status: false` ou `status: draft` sont ignorés.
+- Les dessins utilisent `YYYYMMDD-NN/` (NN = numéro du dessin dans la journée).
 
 ## Développement
 
@@ -155,7 +155,7 @@ Le fichier `.env` est chargé automatiquement au démarrage.
 | `/shorts`, `/short/:date/:slug` | Shorts |
 | `/essays`, `/essay/:date/:slug` | Essais |
 | `/experiments`, `/experiment/:date/:slug` | Expériences p5.js |
-| `/drawings`, `/drawing/:date/:time` | Dessins |
+| `/drawings`, `/drawing/:date/:id` | Dessins |
 | `/recherche?s=…` | Recherche |
 | `/tag/:tag`, `/archive/:yyyy-mm` | Filtres |
 | `/about` | Page statique |
@@ -203,8 +203,8 @@ dossier de contenu, définir `SITE_URL`, et éventuellement les tokens.
   ```bash
   node scripts/import-wordpress.mjs chemin/export.xml [--drafts] [--limit=2]
   ```
-- `scripts/normalize-content.mjs` — réorganise le contenu (image unique à la racine,
-  galeries dans `content/gallery/`, expériences aplaties).
+- `scripts/normalize-content.mjs` — ancien script de normalisation de l’arborescence
+  plate (obsolète depuis le passage aux dossiers `YYYYMMDD-slug/`).
 
 ---
 

@@ -6,7 +6,7 @@ dist/
 
 # Runtime data (SQLite, caches, optimized images)
 data/
-content/
+/content/
 
 # Local env
 .env

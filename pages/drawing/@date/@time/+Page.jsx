@@ -21,7 +21,7 @@ export default function Page() {
         </div>
 
         <p className="doodle-caption" style={{ textAlign: "center" }}>
-          {formatDateFr(drawing.date)} · {drawing.time}
+          {formatDateFr(drawing.date)}
         </p>
 
         <div className="doodle-strip">

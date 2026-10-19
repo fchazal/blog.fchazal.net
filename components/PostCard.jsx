@@ -28,7 +28,7 @@ export function PostCard({ entry, headingLevel = 2, afterContent = null, showTag
 
             {showTags && entry.tags && entry.tags.length > 0 && (
               <p className="post-categories">
-                <span>dans </span>
+                <span> dans </span>
                 {entry.tags.map((tag, index) => (
                   <span key={tag}>
                     <a href={`/tag/${slugify(tag)}`} rel="tag">

@@ -22,8 +22,8 @@
 
 /* Conteneur du contenu principal */
 .main-wrap {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  z-index: 1;
+  padding: 1.25rem;
 }
 
 /* Le <main> s'étire pour pousser le pied de page en bas */
@@ -41,7 +41,7 @@ main {
   }
   /* Le contenu remonte légèrement sous la bannière */
   .content {
-    margin-top: -125px;
+    margin-top: -6rem;
     width: 68.7%;
   }
   /* Sans bandeau latéral : pleine largeur */
@@ -56,7 +56,6 @@ main {
 /* ----- Mobile : pas de marges latérales autour du contenu ---------------- */
 @media (max-width: 640px) {
   .main-wrap {
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
   }
 }

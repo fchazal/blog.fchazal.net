@@ -15,7 +15,7 @@ const DESKTOP_NAV = [
   { href: "/shorts", label: "Shorts" },
   { href: "/essays", label: "Essais" },
   { href: "/experiments", label: "Expériences" },
-  { href: "/about", label: "À propos" },
+//  { href: "/about", label: "À propos" },
 ];
 
 const MOBILE_NAV = [
@@ -24,7 +24,7 @@ const MOBILE_NAV = [
   { href: "/essays", label: "Essais" },
   { href: "/drawings", label: "Dessins" },
   { href: "/experiments", label: "Expériences" },
-  { href: "/about", label: "À propos" },
+//  { href: "/about", label: "À propos" },
 ];
 
 export default function Layout({ children }) {
@@ -134,12 +134,10 @@ export default function Layout({ children }) {
         <span className="header-fade" aria-hidden="true" />
       </figure>
 
-      <main>
-        <div className="wrap main-wrap">
-          <div className="layout">
-            <div className={`content${sidebar ? "" : " no-sidebar"}`}>{children}</div>
-            {sidebar ? <Sidebar sidebar={sidebar} /> : null}
-          </div>
+      <main className="wrap main-wrap">
+        <div className="layout">
+          <div className={`content${sidebar ? "" : " no-sidebar"}`}>{children}</div>
+          {sidebar ? <Sidebar sidebar={sidebar} /> : null}
         </div>
       </main>
 

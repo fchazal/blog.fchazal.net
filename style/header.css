@@ -14,15 +14,10 @@
   z-index: 100;
   transition: box-shadow 0.25s ease;
   backdrop-filter: blur(10px);
-  background: color-mix(in srgb, var(--surface) 60%, transparent 40%);
+  background: linear-gradient(to bottom, var(--surface) 0%,
+   color-mix(in srgb, var(--surface) 60%, transparent 40%) 100%);
   border-bottom: 1px solid color-mix(in srgb, var(--surface) 70%, transparent 30%);
 }
-
-/* État réduit au scroll */
-.topbar.is-compact {
-  box-shadow: 0 4px 18px #0002;
-}
-
 /* Réserve la hauteur de la barre fixe (mise à jour par ResizeObserver) */
 .topbar-spacer {
   height: 216px;
@@ -38,10 +33,6 @@
   padding: 2rem 4rem; /* marge latérale pour ne pas passer sous les outils */
   transition: padding 0.25s ease;
 }
-.topbar.is-compact .header {
-  padding: 0.4rem 4rem;
-}
-
 .blog-title {
   font-family: var(--font-display);
   font-weight: 200;
@@ -50,9 +41,6 @@
   margin: 0;
   text-align: center;
   transition: font-size 0.25s ease;
-}
-.topbar.is-compact .blog-title {
-  font-size: 1.5em;
 }
 /* Le titre et le logo s'enroulent et restent centrés */
 .blog-title a {
@@ -70,7 +58,7 @@
 /* Logo inséré à la place du « & » */
 .title-logo {
   display: inline-block;
-  height: 0.8em;
+  height: 1.1em;
   width: auto;
   margin: 0 0.18em;
   border-radius: 50%;
@@ -80,16 +68,14 @@
 /* ----- Outils (recherche + thème), en haut à droite ---------------------- */
 .header-tools {
   position: absolute;
-  top: 0.75rem;
-  right: 1rem;
   z-index: 50;
+
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-.topbar.is-compact .header-tools {
-  top: 0.5rem;
-  gap: 0.25rem;
+
+  top: .5rem;
+  right: .5rem;
+  gap: .5rem;
 }
 .tool-btn {
   display: inline-flex;
@@ -98,31 +84,29 @@
   width: 40px;
   height: 40px;
   padding: 0;
-  border: 1px solid var(--line);
+  border: 1px solid var(--bg);
   border-radius: 50%;
   color: var(--fg);
-  background: var(--bg);
+  background: color-mix(in srgb, var(--surface) 50%, transparent 50%);
+
   cursor: pointer;
   transition: color 0.15s, background 0.15s, border-color 0.15s;
 }
-.topbar.is-compact .tool-btn {
-  width: 30px;
-  height: 30px;
+.tool-btn svg {
+  display: block;
 }
 .tool-btn:hover {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--on-dark);
 }
-.tool-btn svg {
-  display: block;
-}
+
 
 /* ----- Bannière (image + fondu vers le fond) ----------------------------- */
 .header-visual {
   position: relative;
   width: 100%;
-  height: clamp(220px, 32vw, 420px);
+  height: clamp(200px, 25vw, 400px);
   margin: 0;
   overflow: hidden;
 }
@@ -137,5 +121,21 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(to bottom, white 0%, transparent 50%);
+}
+
+
+
+
+/* État réduit au scroll */
+.topbar.is-compact {
+  box-shadow: 0 4px 18px #0002;
+}
+.topbar.is-compact .header {
+  padding: 1rem 4rem;
+}
+.topbar.is-compact .blog-title {
+  font-size: 1.5em;
+}
+.topbar.is-compact .header-tools {
+  flex-direction: row-reverse;
 }
