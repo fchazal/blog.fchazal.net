@@ -1,12 +1,12 @@
 import { useData } from "vike-react/useData";
 
-import { PAGE_TITLE } from "../../components/ui.js";
+import { GLASS, PAGE_TITLE } from "../../components/ui.js";
 
 export default function Page() {
   const { page } = useData();
 
   return (
-    <article>
+    <article className={GLASS}>
       <h1 className={PAGE_TITLE}>{page ? page.title : "À propos"}</h1>
       {page && (
         <div

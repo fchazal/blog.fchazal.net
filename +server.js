@@ -75,6 +75,13 @@ async function getHandler() {
   // Compatibilité WordPress : /feed -> /feed.xml
   app.get("/feed", async (_request, reply) => reply.redirect("/feed.xml", 301));
 
+  // Ancienne URL de recherche -> /search (en conservant la requête)
+  app.get("/recherche", async (request, reply) => {
+    const queryIndex = request.raw.url.indexOf("?");
+    const search = queryIndex === -1 ? "" : request.raw.url.slice(queryIndex);
+    return reply.redirect(`/search${search}`, 301);
+  });
+
   await vike(app, []);
 
   await app.ready();

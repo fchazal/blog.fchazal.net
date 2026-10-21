@@ -1,9 +1,4 @@
 @layer components {
-  article {
-    background: linear-gradient(180deg, #fffd, #fff 80px);
-    backdrop-filter: blur(15px);
-  }
-
   .entry-content p,
   .article-prose p {
     font-family: var(--font-body);

@@ -38,7 +38,7 @@ export function WorkGallery({ works, pageSize = 9 }) {
 
   return (
     <>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-5">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-5 max-sm:px-5">
         {works.slice(0, visible).map((work, index) => (
           <a
             className="animate-reveal flex flex-col overflow-hidden rounded-card border border-line bg-surface no-underline shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-[3px] hover:shadow-card-hover"

@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { usePageContext } from "vike-react/usePageContext";
 
 import { ScrollProgress } from "../components/ScrollProgress.jsx";
-import { SearchForm, SearchToggle } from "../components/Search.jsx";
+import { SearchOverlay, SearchToggle } from "../components/Search.jsx";
 import { Sidebar } from "../components/Sidebar.jsx";
 import { ThemeToggle } from "../components/ThemeToggle.jsx";
 import { Link } from "../components/Link.jsx";
@@ -33,6 +33,7 @@ export default function Layout({ children }) {
   const [compact, setCompact] = useState(false);
 
   const topbarRef = useRef(null);
+  const closeSearch = useCallback(() => setSearchOpen(false), []);
 
   useEffect(() => {
     const onScroll = () => setCompact(window.scrollY > 90);
@@ -60,48 +61,40 @@ export default function Layout({ children }) {
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollProgress />
-      <div
-        ref={topbarRef}
-        className={`fixed inset-x-0 top-0 z-[100] shadow-[0_1px_0px_#fff8] bg-gradient-to-b from-surface to-surface/70 transition-shadow backdrop-blur-[10px] duration-[250ms] ${
-          compact ? "shadow-[0_4px_18px_rgba(0,0,0,0.13)]" : ""
-        }`}
-      >
-        <div className="relative text-center">
-          <header
-            className={`transition-[padding] duration-[250ms] ${
-              compact ? "p-4" : "p-6"
-            }`}
-          >
-            <h1
-              className={`m-0 text-center font-display font-extralight leading-none text-fg transition-[font-size] duration-[250ms] ${
-                compact ? "text-[1.5em]" : "sm:text-[2.25em] text-[2em]"
-              }`}
-            >
-              <a
-                href="/"
-                className="inline-flex flex-wrap items-center justify-center gap-[0.1em] text-fg no-underline hover:no-underline"
-              >
-                <span>Suppléments d’âme</span>
-                <img
-                  className="inline-block mx-[0.18em] h-[1.1em] w-auto rounded-full align-[-0.08em]"
-                  src="/artboard.png"
-                  alt="&"
-                />
-                <span>Bouts d’humanité</span>
-              </a>
-            </h1>
-          </header>
-        </div>
-      </div>
 
-      <div
-        className={`isolate fixed right-2 top-2 z-500 flex gap-[2px] rounded-full p-[2px]  border border-line/70 bg-surface/[0.3] shadow-menu backdrop-blur-[16px] backdrop-saturate-[140%]  ${
-          compact ? "flex-row-reverse" : "flex-col"
+      <header
+        ref={topbarRef}
+        className={`fixed inset-x-0 top-0 z-[100] bg-gradient-to-b from-surface to-surface/70 text-center backdrop-blur-[10px] transition-shadow duration-[250ms] ${
+          compact ? "shadow-[0_4px_18px_rgba(0,0,0,0.13)]" : "shadow-[0_1px_0_var(--color-header-shadow)]"
         }`}
       >
-        <SearchToggle open={searchOpen} onToggle={() => setSearchOpen((v) => !v)} />
-        <ThemeToggle />
-      </div>
+        <h1
+          className={`m-0 font-display font-extralight leading-none text-fg transition-[font-size,padding] duration-[250ms] ${
+            compact ? "p-4 text-[1.5em]" : "p-6 max-sm:text-[clamp(1.5em,7.5vw,2em)] sm:text-[2.25em]"
+          }`}
+        >
+          <a
+            href="/"
+            className="flex flex-col items-center justify-center gap-[0.04em] text-fg no-underline hover:no-underline"
+          >
+            <span className="inline-flex items-center justify-center gap-[0.1em] whitespace-nowrap">
+              <span>Suppléments d’âme</span>
+              <img className="title-logo theme-logo-light" src="/logo-light.svg" alt="&" />
+              <img className="title-logo theme-logo-dark" src="/logo-dark.svg" alt="&" />
+            </span>
+            <span className="whitespace-nowrap">Bouts d’humanité</span>
+          </a>
+        </h1>
+
+        <div
+          className={`absolute right-2 top-2 z-[110] isolate flex gap-[2px] rounded-full border border-line/70 bg-surface/[0.3] p-[2px] shadow-menu backdrop-blur-[16px] backdrop-saturate-[140%] ${
+            compact ? "flex-row-reverse" : "flex-col"
+          }`}
+        >
+          <SearchToggle open={searchOpen} onToggle={() => setSearchOpen((v) => !v)} />
+          <ThemeToggle />
+        </div>
+      </header>
 
       <nav
         className="pointer-events-none fixed inset-x-0 top-[var(--topbar-height,216px)] z-[95] flex justify-center px-5 pt-4 transition-[top] duration-[250ms] motion-reduce:transition-none max-sm:px-3 max-sm:pt-3"
@@ -123,26 +116,30 @@ export default function Layout({ children }) {
       ) : (
         <figure className="relative m-0 h-[clamp(200px,25vw,400px)] w-full overflow-hidden">
           <img className="block h-full w-full object-cover" src={headerImage} alt="" />
-          <span className="pointer-events-none absolute inset-0" aria-hidden="true" />
         </figure>
       )}
 
-      <main className="relative z-[1] mx-auto w-full max-w-site flex-1 px-5 py-5 max-sm:p-0">
+      {searchOpen ? <SearchOverlay onClose={closeSearch} /> : null}
 
-      {searchOpen && (
-        <SearchForm />
-      )}
-
-        <div className="wide:flex wide:items-start wide:gap-10">
-          <div
-            className={`${sidebar ? "wide:w-content" : "w-full"} ${
-              hideHeaderVisual ? "" : "wide:-mt-24"
-            }`}
-          >
-            {children}
-          </div>
-          {sidebar ? <Sidebar sidebar={sidebar} /> : null}
-        </div>
+      <main
+        className={`relative z-[1] mx-auto flex w-full max-w-site flex-1 flex-col gap-5 px-5 py-5 max-sm:p-0 ${
+          sidebar ? "wide:flex-row wide:items-start wide:gap-10" : ""
+        } ${!sidebar && !hideHeaderVisual ? "wide:-mt-24" : ""}`}
+      >
+        {sidebar ? (
+          <>
+            <div
+              className={`flex w-full flex-col gap-5 wide:w-content ${
+                hideHeaderVisual ? "" : "wide:-mt-24"
+              }`}
+            >
+              {children}
+            </div>
+            <Sidebar sidebar={sidebar} />
+          </>
+        ) : (
+          children
+        )}
       </main>
 
       <footer className="border-t border-line bg-ink py-6 text-center">

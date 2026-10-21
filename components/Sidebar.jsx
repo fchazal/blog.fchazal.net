@@ -79,7 +79,7 @@ export function Sidebar({ sidebar }) {
   if (!sidebar) return null;
 
   return (
-    <aside className="w-full wide:w-sidebar">
+    <aside className="w-full max-sm:px-5 max-sm:pb-5 wide:w-sidebar">
       {sidebar.kind === "drawings" && (
         <SidebarDrawings drawings={sidebar.drawings} />
       )}

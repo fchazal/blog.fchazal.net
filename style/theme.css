@@ -32,6 +32,7 @@
   --shadow-stage: 0 10px 40px rgb(0 0 0 / 0.19);
   --shadow-tool: 0 6px 18px rgb(0 0 0 / 0.13);
   --shadow-menu: 0 8px 30px rgb(0 0 0 / 0.12);
+  --color-header-shadow: rgb(255 255 255 / 0.53);
 
   --breakpoint-wide: 1000px;
   --container-site: 1140px;
@@ -60,4 +61,6 @@ html[data-theme="dark"] {
   --color-line-soft: #2a2721;
 
   --color-glass: rgba(28, 26, 21, 0.92);
+
+  --color-header-shadow: rgb(0 0 0 / 0.55);
 }

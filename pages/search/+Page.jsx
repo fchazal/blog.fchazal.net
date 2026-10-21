@@ -14,7 +14,7 @@ export default function Page() {
   const { query, results } = useData();
 
   return (
-    <div className="mx-auto max-w-[42rem]">
+    <div className="mx-auto w-full max-w-[42rem] max-sm:px-5">
       {query ? (
         <p className="my-4 font-ui text-[0.74rem] font-bold uppercase tracking-[1px] text-muted-2">
           {results.length} résultat{results.length > 1 ? "s" : ""} pour «&nbsp;{query}&nbsp;»

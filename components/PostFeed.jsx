@@ -44,17 +44,16 @@ export function PostFeed({ items, pageSize = 6, showTags = false, variant = "def
 
   return (
     <>
-      <div className="flex flex-col gap-5">
-        {items.slice(0, visible).map((item, index) => (
-          <div
-            className="animate-reveal"
-            key={item.url}
-            style={{ animationDelay: `${Math.min(index, 6) * 45}ms` }}
-          >
-            <PostCard entry={item} showTags={showTags} variant={variant} />
-          </div>
-        ))}
-      </div>
+      {items.slice(0, visible).map((item, index) => (
+        <PostCard
+          key={item.url}
+          entry={item}
+          showTags={showTags}
+          variant={variant}
+          className="animate-reveal"
+          style={{ animationDelay: `${Math.min(index, 6) * 45}ms` }}
+        />
+      ))}
 
       {visible < items.length && <FeedLoader sentinelRef={sentinelRef} live />}
     </>

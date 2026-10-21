@@ -36,6 +36,26 @@
     color: var(--color-accent-link);
   }
 
+  .title-logo {
+    display: inline-block;
+    height: 1.1em;
+    width: auto;
+    margin-left: 0.18em;
+    border-radius: 0.2em;
+  }
+
+  .theme-logo-dark {
+    display: none;
+  }
+
+  html[data-theme="dark"] .theme-logo-light {
+    display: none;
+  }
+
+  html[data-theme="dark"] .theme-logo-dark {
+    display: inline-block;
+  }
+
   h1,
   h2,
   h3,

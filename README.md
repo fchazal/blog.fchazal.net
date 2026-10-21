@@ -157,7 +157,7 @@ Le fichier `.env` est chargé automatiquement au démarrage.
 | `/essays`, `/essay/:date/:slug` | Essais |
 | `/experiments`, `/experiment/:date/:slug` | Expériences p5.js |
 | `/drawings`, `/drawing/:date/:id` | Dessins |
-| `/recherche?s=…` | Recherche |
+| `/search?s=…` | Recherche |
 | `/tag/:tag`, `/archive/:yyyy-mm` | Filtres |
 | `/about` | Page statique |
 | `/feed.xml`, `/feed.json` | Flux global (et `/texts`, `/shorts`, `/essays`, `/experiments`, `/drawings`) |

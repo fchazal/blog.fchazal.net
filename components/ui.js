@@ -1,3 +1,7 @@
+export const GLASS = "bg-surface/85 backdrop-blur-[15px]";
+
+export const CARD = `rounded-card ${GLASS} shadow-card max-sm:rounded-none`;
+
 export const WIDGET_TITLE =
   "mb-4 mt-0 inline-block border-b-2 border-accent pb-1 font-ui text-[0.78rem] font-black uppercase tracking-[1px] text-accent";
 
@@ -18,6 +22,4 @@ export const TOOL_BUTTON =
 export const PAGE_TITLE =
   "m-0 font-display text-[2.4em] font-normal uppercase leading-none text-fg";
 
-export const BODY_TEXT = "mt-5";
-
-export const POST_LIST = "flex flex-col gap-5";
+export const BODY_TEXT = "mt-0";

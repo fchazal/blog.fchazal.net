@@ -1,6 +1,7 @@
 import { LikeButton } from "./LikeButton.jsx";
 import { ReaderNav } from "./ReaderNav.jsx";
 import { formatDateFr } from "./format.js";
+import { GLASS } from "./ui.js";
 
 export function DrawingFocus({ drawing, drawings, prev, next, likeCount }) {
   if (!drawing) {
@@ -15,7 +16,7 @@ export function DrawingFocus({ drawing, drawings, prev, next, likeCount }) {
     <>
       <ReaderNav prev={prev} next={next} />
 
-      <article>
+      <article className={GLASS}>
         <div className="mb-5 flex gap-2.5 overflow-x-auto px-0.5 py-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {drawings.map((item) => (
             <a
