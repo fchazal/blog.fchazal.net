@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { PostCard } from "./PostCard.jsx";
+import { FeedEnd, FeedLoader } from "./FeedStatus.jsx";
 
 /** Flux d'articles/essais : chargement progressif + apparition latérale. */
 export function PostFeed({ items, pageSize = 6, showTags = false, variant = "default" }) {
@@ -38,15 +39,15 @@ export function PostFeed({ items, pageSize = 6, showTags = false, variant = "def
   }, [items.length, pageSize]);
 
   if (!items || items.length === 0) {
-    return <p className="feed-end">Rien à afficher.</p>;
+    return <FeedEnd />;
   }
 
   return (
     <>
-      <div className="posts">
+      <div className="flex flex-col gap-5">
         {items.slice(0, visible).map((item, index) => (
           <div
-            className="reveal"
+            className="animate-reveal"
             key={item.url}
             style={{ animationDelay: `${Math.min(index, 6) * 45}ms` }}
           >
@@ -55,12 +56,7 @@ export function PostFeed({ items, pageSize = 6, showTags = false, variant = "def
         ))}
       </div>
 
-      {visible < items.length && (
-        <div className="feed-loader" ref={sentinelRef} aria-live="polite">
-          <span className="spinner" />
-          <span>Chargement…</span>
-        </div>
-      )}
+      {visible < items.length && <FeedLoader sentinelRef={sentinelRef} live />}
     </>
   );
 }

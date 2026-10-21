@@ -1,6 +1,6 @@
 import { useData } from "vike-react/useData";
 
-import { SearchForm } from "../../components/Search.jsx";
+import { FeedEnd } from "../../components/FeedStatus.jsx";
 import { formatDateFr } from "../../components/format.js";
 
 const TYPE_LABEL = {
@@ -14,30 +14,37 @@ export default function Page() {
   const { query, results } = useData();
 
   return (
-    <div className="search-page">
-      <SearchForm defaultValue={query} />
-
+    <div className="mx-auto max-w-[42rem]">
       {query ? (
-        <p className="search-count">
+        <p className="my-4 font-ui text-[0.74rem] font-bold uppercase tracking-[1px] text-muted-2">
           {results.length} résultat{results.length > 1 ? "s" : ""} pour «&nbsp;{query}&nbsp;»
         </p>
       ) : null}
 
       {results.length > 0 && (
-        <ul className="search-results">
+        <ul className="m-0 list-none p-0">
           {results.map((result) => (
-            <li key={`${result.type}-${result.url}`}>
-              <a href={result.url}>
-                <span className="result-type">{TYPE_LABEL[result.type] || result.type}</span>
-                <span className="result-title">{result.title}</span>
-                <span className="result-meta">
+            <li
+              className="border-b border-line-soft"
+              key={`${result.type}-${result.url}`}
+            >
+              <a className="block py-4 no-underline" href={result.url}>
+                <span className="mr-2 font-ui text-[0.62rem] font-black uppercase tracking-[1px] text-accent">
+                  {TYPE_LABEL[result.type] || result.type}
+                </span>
+                <span className="font-display text-[1.3rem] text-fg">
+                  {result.title}
+                </span>
+                <span className="mt-1 block font-ui text-[0.68rem] font-bold uppercase tracking-[1px] text-muted-2">
                   {formatDateFr(result.date)}
                   {result.tags && result.tags.length > 0
                     ? ` · ${result.tags.join(", ")}`
                     : ""}
                 </span>
                 {result.excerpt ? (
-                  <span className="result-excerpt">{result.excerpt}</span>
+                  <span className="mt-1.5 block font-body text-fg-body">
+                    {result.excerpt}
+                  </span>
                 ) : null}
               </a>
             </li>
@@ -45,7 +52,7 @@ export default function Page() {
         </ul>
       )}
 
-      {query && results.length === 0 && <p className="feed-end">Aucun résultat.</p>}
+      {query && results.length === 0 && <FeedEnd>Aucun résultat.</FeedEnd>}
     </div>
   );
 }

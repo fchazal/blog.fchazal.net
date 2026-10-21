@@ -57,7 +57,11 @@ export function LikeButton({ likeKey, initialCount = 0 }) {
   return (
     <button
       type="button"
-      className={`like-button${liked ? " is-liked" : ""}`}
+      className={`inline-flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-pill border px-4 py-3 font-ui text-[0.72rem] font-black uppercase tracking-[1px] transition-colors disabled:cursor-default ${
+        liked
+          ? "border-accent bg-accent text-on-dark"
+          : "border-line bg-surface text-fg enabled:hover:border-accent-link enabled:hover:text-accent-link"
+      }`}
       onClick={like}
       aria-pressed={liked}
       aria-label={liked ? "Vous aimez ce texte" : "Aimer ce texte"}

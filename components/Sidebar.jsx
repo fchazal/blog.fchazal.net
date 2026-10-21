@@ -1,15 +1,26 @@
 import { LikeButton } from "./LikeButton.jsx";
 import { ShareButtons } from "./ShareButtons.jsx";
 import { Webmentions } from "./Webmentions.jsx";
+import { PILL_ACTIVE, PILL_BASE, PILL_IDLE, WIDGET_TITLE } from "./ui.js";
 
 function SidebarDrawings({ drawings }) {
   const items = drawings || [];
   if (items.length === 0) return null;
   return (
-    <div className="sidebar-doodles">
+    <div className="grid grid-cols-2 gap-3 max-sm:grid-cols-3">
       {items.map((drawing) => (
-        <a key={drawing.url} href={drawing.url} title={drawing.date}>
-          <img src={drawing.src} alt="" loading="lazy" />
+        <a
+          className="block rounded-card leading-none shadow-[0_0_4px_rgba(0,0,0,0.13)] transition-[transform,box-shadow] duration-200 hover:z-[3] hover:scale-110 hover:shadow-doodle"
+          key={drawing.url}
+          href={drawing.url}
+          title={drawing.date}
+        >
+          <img
+            className="aspect-square w-full rounded-card bg-white object-contain"
+            src={drawing.src}
+            alt=""
+            loading="lazy"
+          />
         </a>
       ))}
     </div>
@@ -18,19 +29,24 @@ function SidebarDrawings({ drawings }) {
 
 function SidebarTags({ tags, basePath, active }) {
   return (
-    <div className="widget_tags">
-      <h3 className="widget-title">Catégories</h3>
-      <div className="sidebar-tags">
-        <a href={basePath} className={`tag-pill${!active ? " is-active" : ""}`}>
+    <div>
+      <h3 className={WIDGET_TITLE}>Catégories</h3>
+      <div className="flex flex-wrap gap-2">
+        <a
+          href={basePath}
+          className={`${PILL_BASE} ${!active ? PILL_ACTIVE : PILL_IDLE}`}
+        >
           Tout
         </a>
         {tags.map((tag) => (
           <a
             key={tag.slug}
             href={`${basePath}?tag=${tag.slug}`}
-            className={`tag-pill${active === tag.slug ? " is-active" : ""}`}
+            className={`${PILL_BASE} ${
+              active === tag.slug ? PILL_ACTIVE : PILL_IDLE
+            }`}
           >
-            {tag.name}&nbsp;<span>({tag.count})</span>
+            {tag.name}&nbsp;<span className="font-extralight opacity-60">({tag.count})</span>
           </a>
         ))}
       </div>
@@ -42,11 +58,11 @@ function SidebarActions({ likeKey, likeCount, webmentions }) {
   return (
     <>
       <div>
-        <h3 className="widget-title">Réagir</h3>
+        <h3 className={WIDGET_TITLE}>Réagir</h3>
         <LikeButton likeKey={likeKey} initialCount={likeCount} />
         <ShareButtons />
       </div>
-      <div style={{ marginTop: "2rem" }}>
+      <div className="mt-8">
         <Webmentions data={webmentions} />
       </div>
     </>
@@ -63,7 +79,7 @@ export function Sidebar({ sidebar }) {
   if (!sidebar) return null;
 
   return (
-    <aside className={`sidebar sidebar--${sidebar.kind}`}>
+    <aside className="w-full wide:w-sidebar">
       {sidebar.kind === "drawings" && (
         <SidebarDrawings drawings={sidebar.drawings} />
       )}

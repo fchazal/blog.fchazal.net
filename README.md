@@ -45,7 +45,7 @@ recherche, flux RSS/JSON, Webmentions et likes.
 - **Fastify** (serveur HTTP + API)
 - **`node:sqlite`** (module SQLite intégré à Node, aucune dépendance native)
 - `gray-matter` (frontmatter), `markdown-it` (Markdown)
-- CSS **pur** (variables CSS `:root` / `var()`)
+- **Tailwind CSS v4** (tokens dans `style/theme.css`, thème sombre via variables)
 
 > Développé sur Node 26. Le conteneur utilise `node:24-slim` (nécessaire pour `node:sqlite`).
 
@@ -59,7 +59,8 @@ recherche, flux RSS/JSON, Webmentions et likes.
 │   ├── server/         # médias, likes (SQLite), flux, webmentions
 │   └── shared/         # utilitaires partagés client/serveur
 ├── components/         # composants React
-├── pages/              # routes Vike (+Page/+data), styles CSS
+├── pages/              # routes Vike (+Page/+data)
+├── style/              # Tailwind : entrée, tokens, base et contenu Markdown
 ├── scripts/            # import WordPress, normalisation du contenu
 ├── public/             # assets statiques (logo, image d'en-tête)
 ├── Dockerfile

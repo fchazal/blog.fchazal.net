@@ -14,6 +14,9 @@ function Chevron({ dir }) {
   );
 }
 
+const READER_NAV =
+  "fixed bottom-4 z-[90] flex h-11 w-11 items-center justify-center rounded-full border border-line bg-glass text-fg no-underline shadow-tool transition-colors hover:border-accent hover:bg-accent hover:text-on-dark wide:bottom-auto wide:top-1/2 wide:h-[52px] wide:w-[52px] wide:-translate-y-1/2";
+
 /** Chevrons précédent / suivant, fixés sur les côtés (navigation de lecture). */
 export function ReaderNav({ prev, next, prevLabel = "Précédent", nextLabel = "Suivant" }) {
   if (!prev && !next) return null;
@@ -22,7 +25,7 @@ export function ReaderNav({ prev, next, prevLabel = "Précédent", nextLabel = "
     <>
       {prev ? (
         <a
-          className="reader-nav reader-nav-prev"
+          className={`${READER_NAV} left-3 wide:left-[18px]`}
           href={prev.url}
           title={`${prevLabel} : ${prev.title}`}
           aria-label={`${prevLabel} : ${prev.title}`}
@@ -33,7 +36,7 @@ export function ReaderNav({ prev, next, prevLabel = "Précédent", nextLabel = "
 
       {next ? (
         <a
-          className="reader-nav reader-nav-next"
+          className={`${READER_NAV} right-3 wide:right-[18px]`}
           href={next.url}
           title={`${nextLabel} : ${next.title}`}
           aria-label={`${nextLabel} : ${next.title}`}

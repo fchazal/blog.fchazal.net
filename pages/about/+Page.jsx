@@ -1,14 +1,16 @@
 import { useData } from "vike-react/useData";
 
+import { PAGE_TITLE } from "../../components/ui.js";
+
 export default function Page() {
   const { page } = useData();
 
   return (
     <article>
-      <h1 className="post-title">{page ? page.title : "À propos"}</h1>
+      <h1 className={PAGE_TITLE}>{page ? page.title : "À propos"}</h1>
       {page && (
         <div
-          className="post-content article-prose"
+          className="article-prose mt-5"
           dangerouslySetInnerHTML={{ __html: page.html }}
         />
       )}

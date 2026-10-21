@@ -2,6 +2,7 @@ import { useData } from "vike-react/useData";
 
 import { PostCard } from "../../../../components/PostCard.jsx";
 import { ReaderNav } from "../../../../components/ReaderNav.jsx";
+import { BODY_TEXT, PAGE_TITLE } from "../../../../components/ui.js";
 
 export default function Page() {
   const { essay, prev, next } = useData();
@@ -9,8 +10,8 @@ export default function Page() {
   if (!essay) {
     return (
       <>
-        <h1 className="post-title">Essai introuvable</h1>
-        <p className="post-content">Cet essai n’existe pas ou n’est pas encore publié.</p>
+        <h1 className={PAGE_TITLE}>Essai introuvable</h1>
+        <p className={BODY_TEXT}>Cet essai n’existe pas ou n’est pas encore publié.</p>
       </>
     );
   }

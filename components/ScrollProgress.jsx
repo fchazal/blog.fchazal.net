@@ -20,8 +20,11 @@ export function ScrollProgress() {
   }, []);
 
   return (
-    <div className="scroll-progress" aria-hidden="true">
-      <span style={{ transform: `scaleY(${progress})` }} />
+    <div className="pointer-events-none fixed right-0 top-0 z-[200] h-screen w-[3px]" aria-hidden="true">
+      <span
+        className="block h-full w-full origin-top bg-accent"
+        style={{ transform: `scaleY(${progress})` }}
+      />
     </div>
   );
 }

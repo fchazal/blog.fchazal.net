@@ -2,6 +2,7 @@ import { useData } from "vike-react/useData";
 
 import { DateBadge } from "../../../../components/DateBadge.jsx";
 import { ReaderNav } from "../../../../components/ReaderNav.jsx";
+import { BODY_TEXT, PAGE_TITLE } from "../../../../components/ui.js";
 
 function buildViewer(source) {
   const p5 = "https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js";
@@ -19,8 +20,10 @@ export default function Page() {
   if (!work) {
     return (
       <>
-        <h1 className="post-title">Expérience introuvable</h1>
-        <p className="post-content">Cette expérience n’existe pas ou n’est pas encore publiée.</p>
+        <h1 className={PAGE_TITLE}>Expérience introuvable</h1>
+        <p className={BODY_TEXT}>
+          Cette expérience n’existe pas ou n’est pas encore publiée.
+        </p>
       </>
     );
   }
@@ -28,24 +31,30 @@ export default function Page() {
   return (
     <>
       <ReaderNav prev={prev} next={next} />
-      <article className="post single">
-        <div className="post-inner">
-          <div className="post-header">
-            <h1 className="post-title">
-              <a href={work.url}>{work.title}</a>
+      <article className="rounded-card bg-surface shadow-card max-sm:rounded-none">
+        <div className="p-[30px]">
+          <div>
+            <h1 className="m-0 font-display text-[2.4em] font-bold uppercase leading-none text-fg">
+              <a
+                className="text-inherit no-underline hover:text-accent hover:no-underline"
+                href={work.url}
+              >
+                {work.title}
+              </a>
             </h1>
-            <div className="post-meta">
-              <p className="post-date">
-                <a href={work.url}>
+            <div className="mt-2 border-t border-line pt-2 font-ui text-[0.68rem] font-bold uppercase tracking-[1px]">
+              <p className="m-0 inline-block pr-[0.4em] text-muted">
+                <a className="no-underline" href={work.url}>
                   <DateBadge date={work.date} />
                 </a>
               </p>
             </div>
           </div>
 
-          <div className="post-content entry-content">
-            <div className="work-frame">
+          <div className="entry-content mt-5">
+            <div className="relative mb-5 aspect-square w-full overflow-hidden rounded-card bg-[#0d0d10]">
               <iframe
+                className="block h-full w-full border-0"
                 title={work.title}
                 srcDoc={buildViewer(work.source)}
                 sandbox="allow-scripts"

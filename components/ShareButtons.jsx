@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { PILL, WIDGET_TITLE } from "./ui.js";
+
 /** Boutons de partage (copie du lien + réseaux). */
 export function ShareButtons() {
   const [url, setUrl] = useState("");
@@ -24,14 +26,14 @@ export function ShareButtons() {
   }
 
   return (
-    <div className="share">
-      <h3 className="widget-title">Partager</h3>
-      <div className="share-buttons">
-        <button type="button" className="share-btn" onClick={copyLink}>
+    <div className="mt-5">
+      <h3 className={WIDGET_TITLE}>Partager</h3>
+      <div className="flex flex-wrap gap-2">
+        <button type="button" className={PILL} onClick={copyLink}>
           {copied ? "Lien copié" : "Copier le lien"}
         </button>
         <a
-          className="share-btn"
+          className={PILL}
           href={`https://mastodon.social/share?text=${enc(shareText)}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -39,7 +41,7 @@ export function ShareButtons() {
           Mastodon
         </a>
         <a
-          className="share-btn"
+          className={PILL}
           href={`https://bsky.app/intent/compose?text=${enc(shareText)}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -47,7 +49,7 @@ export function ShareButtons() {
           Bluesky
         </a>
         <a
-          className="share-btn"
+          className={PILL}
           href={`https://twitter.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`}
           target="_blank"
           rel="noopener noreferrer"

@@ -1,4 +1,4 @@
-import { PostMedia } from "./PostMedia.jsx";
+import { PostMedia, PostMediaCarousel } from "./PostMedia.jsx";
 import { formatDateFr } from "./format.js";
 import { slugify } from "../src/shared/slug.js";
 
@@ -17,33 +17,36 @@ export function PostCard({
   const isShort = variant === "short";
 
   return (
-    <article
-      className={`post h-entry${headingLevel === 1 ? " single" : ""}${
-        isShort ? " post--short" : ""
-      }`}
-    >
-      <div className="post-inner">
+    <article className="h-entry rounded-card bg-surface- shadow-card max-sm:rounded-none">
+      <div className="p-[30px]">
         {!isShort && (
-          <div className="post-header">
-            <Heading className="post-title p-name">
-              <a className="u-url" href={entry.url}>
+          <div>
+            <Heading className="p-name m-0 font-display text-[2.4em] font-bold uppercase leading-none text-fg">
+              <a
+                className="u-url text-inherit no-underline hover:text-accent hover:no-underline"
+                href={entry.url}
+              >
                 {entry.title}
               </a>
             </Heading>
 
-            <div className="post-meta">
-              <p className="post-date">
-                <a href={entry.url}>
+            <div className="font-ui text-[0.68rem] font-bold uppercase tracking-[1px]">
+              <p className="m-0 inline-block pr-[0.4em] text-muted">
+                <a className="text-accent no-underline" href={entry.url}>
                   {entry.date}
                 </a>
               </p>
 
               {showTags && entry.tags && entry.tags.length > 0 && (
-                <p className="post-categories">
-                  <span> dans </span>
+                <p className="mb-0 mt-[0.6rem] inline-block text-muted-2">
+                  <span className="text-muted"> dans </span>
                   {entry.tags.map((tag, index) => (
                     <span key={tag}>
-                      <a href={`/tag/${slugify(tag)}`} rel="tag">
+                      <a
+                        className="text-muted-2 no-underline hover:text-accent-link"
+                        href={`/tag/${slugify(tag)}`}
+                        rel="tag"
+                      >
                         {tag}
                       </a>
                       {index < entry.tags.length - 1 ? ", " : ""}
@@ -51,22 +54,23 @@ export function PostCard({
                   ))}
                 </p>
               )}
-
-              {/*
-                <a href={entry.url}>
-                  <DateBadge date={entry.date} />
-                </a>
-              */}
             </div>
-
           </div>
         )}
 
-        <div className="post-content entry-content e-content">
-          <PostMedia images={entry.images} />
-          <div className="post-text" dangerouslySetInnerHTML={{ __html: entry.html }} />
+        <div
+          className={`entry-content e-content flow-root ${isShort ? "mt-0" : "mt-5"}`}
+        >
+          <PostMedia image={entry.images && entry.images[0]} />
+          <div dangerouslySetInnerHTML={{ __html: entry.html }} />
+          <PostMediaCarousel
+            images={entry.images ? entry.images.slice(1) : []}
+          />
           {isShort && (
-            <time className="short-date" dateTime={entry.date}>
+            <time
+              className="mt-4 block text-right font-body text-[0.9rem] italic text-muted"
+              dateTime={entry.date}
+            >
               {formatDateFr(entry.date)}
             </time>
           )}

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { TOOL_BUTTON } from "./ui.js";
+
 function MoonIcon() {
   return (
     <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
@@ -53,7 +55,7 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      className="tool-btn"
+      className={TOOL_BUTTON}
       onClick={toggle}
       aria-label={isDark ? "Passer en thème clair" : "Passer en thème sombre"}
       title={isDark ? "Thème clair" : "Thème sombre"}

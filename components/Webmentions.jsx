@@ -1,4 +1,8 @@
 import { formatDateFr } from "./format.js";
+import { WIDGET_TITLE } from "./ui.js";
+
+const AVATAR =
+  "inline-flex items-center justify-center rounded-full bg-surface-2 object-cover font-ui text-[11px] font-black text-muted";
 
 function initials(name) {
   const value = (name || "?").trim();
@@ -28,11 +32,11 @@ function Avatar({ person, size = 32 }) {
       height={size}
       loading="lazy"
       referrerPolicy="no-referrer"
-      className="wm-avatar"
+      className={AVATAR}
       style={{ width: size, height: size }}
     />
   ) : (
-    <span className="wm-avatar" style={{ width: size, height: size }}>
+    <span className={AVATAR} style={{ width: size, height: size }}>
       {initials(name)}
     </span>
   );
@@ -54,13 +58,13 @@ export function Webmentions({ data }) {
   const reactions = faces.length;
 
   return (
-    <section className="webmentions">
+    <section>
       {reactions > 0 && (
         <div>
-          <h3 className="widget-title">
-            Réactions <span style={{ opacity: 0.6 }}>({reactions})</span>
+          <h3 className={WIDGET_TITLE}>
+            Réactions <span className="opacity-60">({reactions})</span>
           </h3>
-          <ul className="wm-faces">
+          <ul className="m-0 flex list-none flex-wrap gap-1 p-0">
             {faces.map((mention) => (
               <li
                 key={mention["wm-id"] || mention.url}
@@ -76,30 +80,38 @@ export function Webmentions({ data }) {
       )}
 
       {replies.length > 0 && (
-        <div style={{ marginTop: "2rem" }}>
-          <h3 className="widget-title">Réponses ({replies.length})</h3>
+        <div className="mt-8">
+          <h3 className={WIDGET_TITLE}>Réponses ({replies.length})</h3>
           {replies.map((mention) => (
-            <article className="wm-reply h-cite" key={mention["wm-id"] || mention.url}>
-              <header className="wm-reply-header">
+            <article
+              className="h-cite border-b border-line-soft py-4 last:border-b-0"
+              key={mention["wm-id"] || mention.url}
+            >
+              <header className="flex items-center gap-3">
                 <Avatar person={mention.author} size={40} />
-                <div className="wm-reply-meta">
+                <div className="flex flex-col">
                   <a
-                    className="p-author h-card"
+                    className="h-card p-author font-ui font-bold text-fg no-underline"
                     href={mention.author?.url || mention.url}
                     rel="nofollow noopener noreferrer"
                   >
                     {authorName(mention)}
                   </a>
                   {mention.published && (
-                    <time className="dt-published" dateTime={mention.published}>
+                    <time
+                      className="dt-published font-ui text-[0.72rem] uppercase tracking-[1px] text-muted-2"
+                      dateTime={mention.published}
+                    >
                       {formatDateFr(mention.published.slice(0, 10))}
                     </time>
                   )}
                 </div>
               </header>
-              <div className="wm-reply-content e-content">{contentText(mention)}</div>
+              <div className="e-content mt-2.5 whitespace-pre-line font-body text-base text-fg-body">
+                {contentText(mention)}
+              </div>
               <a
-                className="wm-reply-source u-url"
+                className="u-url mt-2.5 inline-block font-ui text-[0.7rem] font-black uppercase tracking-[1px] text-accent-link no-underline"
                 href={mention.url}
                 rel="nofollow noopener noreferrer"
               >
@@ -110,7 +122,7 @@ export function Webmentions({ data }) {
         </div>
       )}
 
-      <p className="wm-respond">
+      <p className="mt-6 font-ui text-[0.72rem] uppercase tracking-[1px] text-muted-2">
         Une réponse à publier ? Envoyez une <a href={endpoint}>webmention</a>.
       </p>
     </section>

@@ -1,0 +1,63 @@
+@theme {
+  --color-accent: #ba0d0d;
+  --color-accent-link: #ba0d0d;
+
+  --color-fg: #111;
+  --color-fg-soft: #333;
+  --color-fg-body: #555;
+  --color-muted: #666;
+  --color-muted-2: #999;
+  --color-faint: #bbb;
+
+  --color-bg: #fafafa;
+  --color-surface: #fff;
+  --color-surface-2: #f2f2f2;
+  --color-line: #ddd;
+  --color-line-soft: #eee;
+
+  --color-ink: #111;
+  --color-on-dark: #fff;
+  --color-glass: rgba(255, 255, 255, 0.92);
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Petrona", Georgia, serif;
+  --font-ui: "Lato", Helvetica, sans-serif;
+
+  --radius-card: 10px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 0 20px rgb(0 0 0 / 0.13);
+  --shadow-card-hover: 0 8px 26px rgb(0 0 0 / 0.19);
+  --shadow-doodle: 0 12px 32px rgb(0 0 0 / 0.19);
+  --shadow-stage: 0 10px 40px rgb(0 0 0 / 0.19);
+  --shadow-tool: 0 6px 18px rgb(0 0 0 / 0.13);
+  --shadow-menu: 0 8px 30px rgb(0 0 0 / 0.12);
+
+  --breakpoint-wide: 1000px;
+  --container-site: 1140px;
+  --width-content: 68.7%;
+  --width-sidebar: 26.3%;
+
+  --animate-reveal: reveal-slide 0.45s ease both;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-accent-link: #d9605c;
+
+  --color-fg: #ddd6c8;
+  --color-fg-soft: #bdb5a5;
+  --color-fg-body: #cdc6b8;
+  --color-muted: #8d8578;
+  --color-muted-2: #9a9285;
+  --color-faint: #4a463f;
+
+  --color-bg: #14120e;
+  --color-surface: #1c1a15;
+  --color-surface-2: #201d18;
+  --color-line: #2e2b25;
+  --color-line-soft: #2a2721;
+
+  --color-glass: rgba(28, 26, 21, 0.92);
+}
