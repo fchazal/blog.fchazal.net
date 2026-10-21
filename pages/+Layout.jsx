@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { usePageContext } from "vike-react/usePageContext";
 
+import { CategoryMenu } from "../components/CategoryMenu.jsx";
 import { ScrollProgress } from "../components/ScrollProgress.jsx";
 import { SearchOverlay, SearchToggle } from "../components/Search.jsx";
 import { Sidebar } from "../components/Sidebar.jsx";
@@ -28,6 +29,10 @@ export default function Layout({ children }) {
   const headerImage = data.headerImage || "/site-header.jpg";
   const hideHeaderVisual = data.hideHeaderVisual === true;
   const sidebar = data.sidebar || null;
+  const activeType =
+    PAGE_TYPES.find((item) =>
+      item.match.some((prefix) => pageContext.urlPathname.startsWith(prefix)),
+    ) || null;
 
   const [searchOpen, setSearchOpen] = useState(false);
   const [compact, setCompact] = useState(false);
@@ -94,10 +99,21 @@ export default function Layout({ children }) {
           <SearchToggle open={searchOpen} onToggle={() => setSearchOpen((v) => !v)} />
           <ThemeToggle />
         </div>
+
+        <nav
+          className={`absolute left-2 top-2 z-[110] ${
+            compact ? "block" : "hidden max-sm:block"
+          }`}
+          aria-label="Types de publications"
+        >
+          <CategoryMenu items={PAGE_TYPES} active={activeType} compact={compact} />
+        </nav>
       </header>
 
       <nav
-        className="pointer-events-none fixed inset-x-0 top-[var(--topbar-height,216px)] z-[95] flex justify-center px-5 pt-4 transition-[top] duration-[250ms] motion-reduce:transition-none max-sm:px-3 max-sm:pt-3"
+        className={`pointer-events-none fixed inset-x-0 top-[var(--topbar-height,216px)] z-[95] justify-center px-5 pt-4 transition-[top] duration-[250ms] motion-reduce:transition-none max-sm:px-3 max-sm:pt-3 ${
+          compact ? "hidden" : "flex max-sm:hidden"
+        }`}
         aria-label="Types de publications"
       >
         <ul className="pointer-events-auto flex min-w-0 max-w-full list-none gap-1 overflow-x-auto overscroll-x-contain rounded-pill border border-line/60 bg-surface/[0.72] p-[0.15rem] shadow-menu backdrop-blur-[16px] backdrop-saturate-[140%] [-webkit-overflow-scrolling:touch] [scrollbar-width:none] max-sm:gap-[0.15rem] [&::-webkit-scrollbar]:hidden">
